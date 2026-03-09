@@ -5,6 +5,8 @@
       - actuator_control
       - ftp
       - hil
+      - global_position
+      - rallypoint
       # extras
       - altitude
       - debug_value

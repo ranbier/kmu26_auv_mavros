@@ -256,5 +256,8 @@ to FCU position and attitude estimators.</description>
 This plugin allows computing and publishing wheel odometry coming from FCU wheel encoders.
 Can use either wheel's RPM or WHEEL_DISTANCE messages (the latter gives better accuracy).</description>
   </class>
+  <class name="vision_position_delta" type="mavros::plugin::PluginFactoryTemplate&lt;mavros::extra_plugins::VisionPositionDeltaPlugin&gt;" base_class_type="mavros::plugin::PluginFactory">
+    <description>Plugin to integrate DVL-A50 data (from /dvl/data and /dvl/position) and send VISION_POSITION_DELTA MAVLink messages.</description>
+  </class>
 </library>
 <!-- [[[end]]] (sum: f6VdFSCNBV) -->

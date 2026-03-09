@@ -73,7 +73,7 @@
 /**/local_position:
   ros__parameters:
     frame_id: "map"
-    tf.send: false
+    tf.send: true
     tf.frame_id: "map"
     tf.child_frame_id: "base_link"
     tf.send_fcu: false
@@ -92,9 +92,9 @@
 # setpoint_attitude
 /**/setpoint_attitude:
   ros__parameters:
-    reverse_thrust: false       # allow reversed thrust
-    use_quaternion: false       # enable PoseStamped topic subscriber
-    tf.listen: false            # enable tf listener (disable topic subscribers)
+    reverse_thrust: true       # allow reversed thrust
+    use_quaternion: true       # enable PoseStamped topic subscriber
+    tf.listen: true            # enable tf listener (disable topic subscribers)
     tf.frame_id: "map"
     tf.child_frame_id: "target_attitude"
     tf.rate_limit: 50.0
@@ -107,7 +107,7 @@
 # setpoint_position
 /**/setpoint_position:
   ros__parameters:
-    tf.listen: false            # enable tf listener (disable topic subscribers)
+    tf.listen: true            # enable tf listener (disable topic subscribers)
     tf.frame_id: "map"
     tf.child_frame_id: "target_position"
     tf.rate_limit: 50.0

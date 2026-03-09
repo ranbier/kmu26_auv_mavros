@@ -50,6 +50,7 @@ find_package(diagnostic_updater REQUIRED)
 
 find_package(geographic_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(dvl_msgs REQUIRED)
 find_package(mavros_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
@@ -141,6 +142,7 @@ add_library(mavros_extras_plugins SHARED
   src/plugins/vision_pose_estimate.cpp
   src/plugins/vision_speed_estimate.cpp
   src/plugins/wheel_odometry.cpp
+  src/plugins/vision_position_delta.cpp
   # [[[end]]] (sum: E3zv4+Yl1z)
 )
 target_link_libraries(mavros_extras_plugins PUBLIC
@@ -153,6 +155,7 @@ target_link_libraries(mavros_extras_plugins PUBLIC
   ${std_srvs_TARGETS}
   ${trajectory_msgs_TARGETS}
   ${diagnostic_msgs_TARGETS}
+  ${dvl_msgs_TARGETS}
   angles::angles
   diagnostic_updater::diagnostic_updater
   geographic_msgs::validation

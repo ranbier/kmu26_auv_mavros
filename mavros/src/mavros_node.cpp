@@ -33,6 +33,7 @@ int main(int argc, char * argv[])
 
   std::string fcu_url, gcs_url, uas_url;
   std::string base_link_frame_id, odom_frame_id, map_frame_id;
+  int system_id = 255, component_id = 240;
   int tgt_system = 1, tgt_component = 1;
 
   auto node = std::make_shared<rclcpp::Node>("mavros_node", options);
@@ -40,16 +41,24 @@ int main(int argc, char * argv[])
 
   node->declare_parameter("fcu_url", fcu_url);
   node->declare_parameter("gcs_url", gcs_url);
+  node->declare_parameter("system_id", system_id);
+  node->declare_parameter("component_id", component_id);
   node->declare_parameter("tgt_system", tgt_system);
   node->declare_parameter("tgt_component", tgt_component);
+  node->declare_parameter("target_system_id", tgt_system);
+  node->declare_parameter("target_component_id", tgt_component);
   node->declare_parameter("base_link_frame", base_link_frame_id);
   node->declare_parameter("map_frame", map_frame_id);
   node->declare_parameter("odom_frame", odom_frame_id);
 
   node->get_parameter("fcu_url", fcu_url);
   node->get_parameter("gcs_url", gcs_url);
+  node->get_parameter("system_id", system_id);
+  node->get_parameter("component_id", component_id);
   node->get_parameter("tgt_system", tgt_system);
   node->get_parameter("tgt_component", tgt_component);
+  node->get_parameter("target_system_id", tgt_system);
+  node->get_parameter("target_component_id", tgt_component);
   node->get_parameter("base_link_frame", base_link_frame_id);
   node->get_parameter("map_frame", map_frame_id);
   node->get_parameter("odom_frame", odom_frame_id);
@@ -59,6 +68,10 @@ int main(int argc, char * argv[])
   RCLCPP_INFO(node->get_logger(), "Starting mavros_node container");
   RCLCPP_INFO(node->get_logger(), "FCU URL: %s", fcu_url.c_str());
   RCLCPP_INFO(node->get_logger(), "GCS URL: %s", gcs_url.c_str());
+  RCLCPP_INFO(node->get_logger(), "System ID: %d", system_id);
+  RCLCPP_INFO(node->get_logger(), "Component ID: %d", component_id);
+  RCLCPP_INFO(node->get_logger(), "Target System ID: %d", tgt_system);
+  RCLCPP_INFO(node->get_logger(), "Target Component ID: %d", tgt_component);
   RCLCPP_INFO(node->get_logger(), "UAS Prefix: %s", uas_url.c_str());
 
   RCLCPP_INFO(node->get_logger(), "Starting mavros router node");
@@ -87,6 +100,11 @@ int main(int argc, char * argv[])
 
   {
     std::vector<rclcpp::Parameter> uas_params{};
+
+    uas_params.emplace_back("system_id", system_id);
+    uas_params.emplace_back("component_id", component_id);
+    uas_params.emplace_back("target_system_id", tgt_system);
+    uas_params.emplace_back("target_component_id", tgt_component);
 
     if (base_link_frame_id != "") {
       uas_params.emplace_back("base_link_frame_id", base_link_frame_id);
