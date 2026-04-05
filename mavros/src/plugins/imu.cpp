@@ -605,7 +605,7 @@ private:
    */
   void handle_scaled_pressure(
     const mavlink::mavlink_message_t * msg [[maybe_unused]],
-    mavlink::common::msg::SCALED_PRESSURE & press,
+    mavlink::common::msg::SCALED_PRESSURE2 & press,
     plugin::filter::SystemAndOk filter [[maybe_unused]])
   {
     if (has_hr_imu) {

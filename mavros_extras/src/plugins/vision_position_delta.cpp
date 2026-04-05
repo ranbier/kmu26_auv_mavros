@@ -75,10 +75,12 @@ public:
     const auto dvl_topic = node->declare_parameter<std::string>("dvl_topic", "/dvl/data");
     const auto dvl_dr_topic = node->declare_parameter<std::string>("dvl_dr_topic", "/dvl/position");
 
+    const auto sensor_qos = rclcpp::SensorDataQoS();
+
     dvl_sub = node->create_subscription<DvlMsg>(
-      dvl_topic, 10, std::bind(&VisionPositionDeltaPlugin::dvl_cb, this, _1));
+      dvl_topic, sensor_qos, std::bind(&VisionPositionDeltaPlugin::dvl_cb, this, _1));
     dvl_dr_sub = node->create_subscription<DvlDrMsg>(
-      dvl_dr_topic, 10, std::bind(&VisionPositionDeltaPlugin::dvl_dr_cb, this, _1));
+      dvl_dr_topic, sensor_qos, std::bind(&VisionPositionDeltaPlugin::dvl_dr_cb, this, _1));
 
     RCLCPP_INFO(
       get_logger(),
