@@ -43,6 +43,11 @@ static inline double wrap_angle_pi_std(double angle)
   return angle - M_PI;
 }
 
+static inline double degrees_to_radians(const double degrees)
+{
+  return degrees * M_PI / 180.0;
+}
+
 /**
  * @brief Vision Position Delta plugin
  * @plugin vision_position_delta
@@ -199,9 +204,9 @@ private:
     }
 
     std::lock_guard<std::mutex> lock(attitude_mutex);
-    latest_attitude_rad.x() = msg->roll;
-    latest_attitude_rad.y() = msg->pitch;
-    latest_attitude_rad.z() = msg->yaw;
+    latest_attitude_rad.x() = degrees_to_radians(msg->roll);
+    latest_attitude_rad.y() = degrees_to_radians(msg->pitch);
+    latest_attitude_rad.z() = degrees_to_radians(msg->yaw);
     has_latest_attitude = true;
   }
 
